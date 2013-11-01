@@ -1,0 +1,7 @@
+config.properties
+/data/*.html
+/.idea
+/*.iml
+/out
+/.idea_modules
+/.classpath
