@@ -14,6 +14,7 @@ import java.nio.charset.Charset;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+//인하대학교 정규학기 강의시간표 파서
 public class InhaSugangSiteParser implements Runnable {
     private String year;
     private String semester;
