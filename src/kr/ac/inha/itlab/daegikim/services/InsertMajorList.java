@@ -12,13 +12,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
-/**
- * Created with IntelliJ IDEA.
- * User: daegikim
- * Date: 9/28/13
- * Time: 5:16 PM
- * To change this template use File | Settings | File Templates.
- */
 public class InsertMajorList implements Runnable {
     @Override
     public void run() {
@@ -29,7 +22,7 @@ public class InsertMajorList implements Runnable {
         try {
             node = cleaner.clean(new File("data/index.html"));
         } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
 
         TagNode select = node.getElementsByName("select", true)[0];

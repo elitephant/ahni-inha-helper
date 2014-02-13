@@ -5,11 +5,19 @@ import kr.ac.inha.itlab.daegikim.services.*;
 import java.io.IOException;
 
 public class Main {
+    private static final String YEAR = "2013";
+    private static final String SEMESTER = "fall";
+    private static final String LOCATION = "backup/2013-fall";
+
     public static void main(String[] args) throws IOException {
 /*
         //인하대 수강신청 사이트 파서
-        InhaSugangSiteParser inhaSugangSiteParser = new InhaSugangSiteParser("2013","2");
+        InhaSugangSiteParser inhaSugangSiteParser = new InhaSugangSiteParser(YEAR, SEMESTER, LOCATION);
         inhaSugangSiteParser.run();
+
+        //계절학기 파서
+        InhaSugangSiteParser_S inhaSugangSiteParser_s = new InhaSugangSiteParser_S(YEAR, SEMESTER, LOCATION);
+        inhaSugangSiteParser_s.run();
 
         //lecture_simple 넣는 작업
         InsertUniqueLectures insertUniqueLectures = new InsertUniqueLectures();
@@ -33,8 +41,5 @@ public class Main {
         long end = System.currentTimeMillis();
         System.out.println(end - start);
 */
-
-        InsertUniqueLectures insertUniqueLectures = new InsertUniqueLectures();
-        insertUniqueLectures.run();
     }
 }

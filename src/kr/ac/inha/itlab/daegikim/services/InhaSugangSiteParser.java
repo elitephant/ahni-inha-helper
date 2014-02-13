@@ -14,10 +14,11 @@ import java.nio.charset.Charset;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-//인하대학교 정규학기 강의시간표 파서
+
 public class InhaSugangSiteParser implements Runnable {
     private String year;
     private String semester;
+    private String location;
 
     //전공고유번호:전공명
     private HashMap<String, String> depts;
@@ -28,9 +29,10 @@ public class InhaSugangSiteParser implements Runnable {
     //학수번호:강의클래스
     private HashMap<String, Lecture> lectures;
 
-    public InhaSugangSiteParser(String year, String semester) {
+    public InhaSugangSiteParser(String year, String semester, String location) {
         this.year = year;
         this.semester = semester;
+        this.location = location;
         depts = new HashMap<String, String>();
         kitas = new HashMap<String, String>();
         lectures = new HashMap<String, Lecture>();
@@ -88,7 +90,7 @@ public class InhaSugangSiteParser implements Runnable {
             {
                 InputStream is = hConnection.getInputStream();
                 BufferedReader in = new BufferedReader(new InputStreamReader(is, Charset.forName("EUC-KR")));
-                BufferedWriter out= new BufferedWriter( new FileWriter("data/index.html"));
+                BufferedWriter out= new BufferedWriter( new FileWriter(this.location+"/index.html"));
                 String readLine;
 
                 while((readLine=in.readLine()) != null)
@@ -110,7 +112,7 @@ public class InhaSugangSiteParser implements Runnable {
 
     private void getDepts() throws IOException {
         HtmlCleaner cleaner = new HtmlCleaner();
-        TagNode node = cleaner.clean(new File("data/index.html"));
+        TagNode node = cleaner.clean(new File(this.location+"/index.html"));
 
         TagNode select = node.getElementsByName("select", true)[0];
         for(TagNode option : select.getElementsByName("option", true)){
@@ -120,7 +122,7 @@ public class InhaSugangSiteParser implements Runnable {
 
     private void getKitas() throws IOException {
         HtmlCleaner cleaner = new HtmlCleaner();
-        TagNode node = cleaner.clean(new File("data/index.html"));
+        TagNode node = cleaner.clean(new File(this.location+"/index.html"));
 
         TagNode select = node.getElementsByName("select", true)[1];
         for(TagNode option : select.getElementsByName("option", true)){
@@ -153,7 +155,7 @@ public class InhaSugangSiteParser implements Runnable {
             {
                 InputStream is = hConnection.getInputStream();
                 BufferedReader in = new BufferedReader(new InputStreamReader(is, Charset.forName("EUC-KR")));
-                BufferedWriter out= new BufferedWriter( new FileWriter("data/"+dept+".html"));
+                BufferedWriter out= new BufferedWriter( new FileWriter(this.location+"/"+dept+".html"));
                 String readLine;
 
                 while((readLine=in.readLine()) != null)
@@ -177,7 +179,8 @@ public class InhaSugangSiteParser implements Runnable {
         HtmlCleaner cleaner = new HtmlCleaner();
 
         for(String dept : collection.keySet()) {
-            TagNode node = cleaner.clean(new File("data/"+dept+".html"));
+            System.out.println(dept);
+            TagNode node = cleaner.clean(new File(this.location+"/"+dept+".html"));
 
             //8번째 위치한 테이블이 강의목록 테이블이다
             TagNode table = node.getElementsByName("table", true)[8];
