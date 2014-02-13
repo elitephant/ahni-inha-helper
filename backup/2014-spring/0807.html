@@ -1,0 +1,673 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
+<html>
+	<head>
+		<title>강의시간표</title>
+		<meta name="GENERATOR" content="Microsoft Visual Studio .NET 7.1">
+		<meta name="CODE_LANGUAGE" content="C#">
+		<meta name="vs_defaultClientScript" content="JavaScript">
+		<meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
+		<link rel="stylesheet" type="text/css" href="/ITISWebCommon/CSS/column.css">
+		<link rel="stylesheet" type="text/css" href="/ITISWebCommon/CSS/default.css">
+		<script language="javascript">
+		
+		var base = document.all;
+		/* 포스트백이 일어날 경우 기존의 팝업창 정보를 가지고 있지 않으므로
+			본 페이지를 IFRAME 속에 넣어서 작업함.
+		*/
+		
+		function openInfomation()
+		{
+			var LangCode = document.all["hidLang"].value;
+			//parent.openPop1();
+			if(LangCode == 'ENG')
+			{
+				fn_OpenInformation("Please click 'Course Schedule'.");
+			}
+			else
+			{
+				fn_OpenInformation('시간표에 추가하려면 상단의 [강의시간표]를 먼저 실행하세요.');
+			}
+		}
+		function openPop1()
+		{
+			parent.openPop1();
+		}
+	
+
+		function openPop(data)
+		{
+
+            TimeInsert(data);
+            openPop1();
+            /*
+			if(parent.popUPChk2())
+			{
+				parent.openPop2(data);
+			}
+			else
+			{
+				//fn_OpenInformation('먼저 강의시간표 페이지를 띄우세요.');
+				openInfomation();
+			}
+            */
+			return;
+		}
+
+        function TimeInsert(data)
+        {
+	        document.all.hhdhaksubunban.value = data;
+            document.all.ibtnReSave.click();
+            //document.getElementById('ibtnReSave').click();
+
+            //alert(data);
+        }
+		
+		/*function perSugang()
+		{
+			
+			var strUrl = '/sugang/SU_51001/Lec_Time_Table.aspx?strHakbun='; 
+			var sFeature = 'dialogWidth:772px;dialogHeight:700px;status:no;help:no;scroll_var:yes';
+			//fn_OpenModalDialog(strUrl, sFeature);
+			
+			window.open(strUrl,'LecTimeTable',sFeature);
+		}*/
+		
+		function openCallPage(haksu)
+		{
+			var strUrl = "/sugang/SU_53001/Remain_Search.aspx?gb=open&gubun=1" + "&haksu="+haksu;
+			
+			var sFeature = 'toolbar=1,location=0,directories=0,status=1,menubar=0,scrollbars=1,WIDTH=600,HEIGHT=500';
+			
+			window.open(strUrl,'RemainSearch',sFeature);
+			
+		}
+		
+		/************************************************************************
+		함 수 명	: OpenPrint(fileNm)
+		내    용	: 강의계획서를 리포트로 출력한다
+		작 성 자	: 클린소프트 최창옥
+		최초작성일	: 2005.08.04
+		최종작성일	: 
+		수정내역	:
+		*************************************************************************/
+		function OpenPrint(fileNm)
+		{
+			try
+			{
+				
+				var strUrl		= "http://sugang.inha.ac.kr/STD/SU_65002/" + fileNm;
+				
+				var sFeature = "dialogWidth:900px; dialogHeight:900px; scroll:Yes;"; // 팝업창 크기
+				
+				
+				fn_OpenModalDialog(strUrl, sFeature);
+			}
+			catch(exception)
+			{
+				fn_OpenErrorMessage(exception.description);
+			}
+			return false;
+		}
+
+		function OpenPrintABEEK(fileNm)
+		{
+			try
+			{
+				//var sFeature = "dialogWidth:800px; dialogHeight:900px; scrollbars=1"; // 팝업창 크기
+				//fn_OpenModalDialog(fileNm, sFeature);
+                //alert("공학인증 적용교과 강의계획서 준비 중 입니다. 조만간 오픈예정입니다.");
+                window.open(fileNm,'','toolbar=no, height =900, width=800,scrollbars=1, resizable=yes');
+			}
+			catch(exception)
+			{
+				fn_OpenErrorMessage(exception.description);
+			}
+			return false;
+		}
+
+		</script>
+        <!-- 뷰어 호출 -->
+		<script language="javascript" src="/cabsoft_inha/instrx/rptrx.js"></script>
+	</head>
+	<body class="body-contents">
+		<form name="Form1" method="post" action="Lec_Time_Search.aspx" id="Form1">
+<input type="hidden" name="itisWebCommonPath" id="itisWebCommonPath" id="itisWebCommonPath" id="itisWebCommonPath" value="/ITISWebCommon" />
+<input type="hidden" name="itisExternalLinkSite" id="itisExternalLinkSite" id="itisExternalLinkSite" id="itisExternalLinkSite" value="http://sugang.inha.ac.kr" />
+<input type="hidden" name="reportRootPath" id="reportRootPath" id="reportRootPath" id="reportRootPath" value="/ITISWebCommon/report" />
+<input type="hidden" name="htxtExportType" id="htxtExportType" value="EXCEL" />
+<input type="hidden" name="winClosed" id="winClosed" return="" id="winClosed" id="winClosed" return="" value="open" />
+<input type="hidden" name="errorMessage" id="errorMessage" id="errorMessage" id="errorMessage" value="" />
+<input type="hidden" name="informationMessage" id="informationMessage" id="informationMessage" id="informationMessage" value="" />
+<input type="hidden" name="confirmMessage" id="confirmMessage" id="confirmMessage" id="confirmMessage" value="" />
+<input type="hidden" name="confirmMessageSecu" id="confirmMessageSecu" id="confirmMessageSecu" id="confirmMessageSecu" value="" />
+<input type="hidden" name="informationLeft" id="informationLeft" return="" id="informationLeft" id="informationLeft" return="" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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" />
+
+<script language='javascript' src='/ITISWebCommon/Scripts/enc_login.js'></script><script language='javascript' src='/ITISWebCommon/Scripts/ControlUtil.js'></script><script language='javascript' src='/ITISWebCommon/Scripts/InfragisticsControl.js'></script><script language='javascript' src='/ITISWebCommon/Scripts/FormEvent.js'></script><script language='javascript' src='/ITISWebCommon/Scripts/validation.js'></script><script language='javascript' src='/cabsoft_inha/instrx/jquery-1.9.1.js'></script><script language='javascript' src='/cabsoft_inha/instrx/jquery.fileDownload.js'></script>
+<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEW8AIC5Pmw8AUCu6PvgAMC1eaFmw8C95HYNAKeu4PDCgKnyZz3DwKatYDUDwK/nv7gAwLw2M3WCALZlfXhAQKNvMb7BwK+jvrqAgKfuZ2ZCALUi8GDBQLSi7nDBgKkucneCgKeudmeCgK5opO2BQKF0N+NCQLR+NCFAQLLiJm7BgLzh5j4BAKTktjfBgL+qKqADALH3vacAgLsns/5CwL18YKWCQKO25itDALI7NeBAwKKjP/qBQLXo5beDgKv9ejBCAKo7IfGAgL4lfkjAr34iDkC+O76xgsCv7WolwkCtqPu3Q8C8pH4nAkCt9z3wAwC/OP2qwgCkuu99QsC+YGM3gECgczm8wUC/P6OswgCg8z+8wUCleW0gwECw7fEqwUC+4GAngoC6f7UgwgCrJXMkQgC3dHakQoCnP/ivgsCtqfD4ggCy4iZugoC7PGu0Q0Cw6Wskw8CjMvI7gwCh/D+kwEC8OGS0woCttCEkAwCvdDc0Q0C8v7u8gkCi/DcwQ0CnsXMgAkCz4HnwAsChdyWtQcC6I6z6gsCm7ai8wsCvMruigEC0KXF1AwCv8ruigECvsruigECvcruigECy8zawAcC/ICczwkCu8ruigECmoul7Q4CyvrIsw0CxO2klQkCht+s8w4Cht+41gkCht+ELQKG35CACwKG3/znAwKG38i6CgKG39SRBQKG3+BGAobfzJ0LAobf7P4HAobf+NUOAobfxKgJAobf0A8Cht+84wgCht+IxgMCht+o8w4Cht+01gkCht+ALQKG3+yACwKG3/jnAwKG38S6CgKG39CRBQKG3/xGAobfyJ0LAobf6P4HAobf9NUOAobfwKgJAobfrAwCht+44wgCht+ExgMCht+k8w4Cht+w1gkCht+cLQKG3+iACwKG3/TnAwKG38C6CgKG36yeBQKG3/hGAobfxJ0LAobf5P4HAobf8NUOAobf3KgJAobfqAwCht+04wgCht+AxgMCht+g8w4Cht+M1gkCht+YLQKG3+SACwKG3/DnAwKG39y6CgKG36ieBQKG3/RGAobfwJ0LAobf4P4HAobfzNUOAobf2KgJAobfpAwCht+w4wgCht+cxgMCht+88w4Cht+I1gkCht+ULQKG3+CACwKG38znAwKG39i6CgKG36SeBQKG3/BGAobf3J0LAobf/P4HAobfyNUOAobf1KgJAobfoAwCht+M4wgCht+YxgMCht+48w4Cht+E1gkCht+QLQKG3/yACwKG38jnAwKG39S6CgKG36CeBQKG38xGAobf2J0LAobf+P4HAobfxNUOAobf0KgJAobfvAwCht+I4wgCht+UxgMCxO3ghAMCht/o4gQCht/8xwMCht/AvAoCht/UkQECht+49gkCht+MKwKG35CADwKG36TXCgKG34iMAQKG36jvDQKG37zEBAKG34C5AwKG35SeCgKG3/jyAgKG38zXCQKG3+ziBAKG3/DHAwKG38S8CgKG36iRAQKG37z2CQKG34ArAobflIAPAobfuNcKAobfjIwBAobfrO8NAobfsMQEAobfhLkDAobf6J0KAobf/PICAobfwNcJAobf4OIEAobf9McDAobf2LwKAobfrJEBAobfsPYJAobfhCsCht/ojw8Cht+81woCht+AjAECht+g7w0Cht+0xAQCht+YuQMCht/snQoCht/w8gICht/E1wkCht/k4gQCht/IxwMCht/cvAoCht+gkQECht+09gkCht+YKwKG3+yPDwKG37DXCgKG34SMAQKG36TvDQKG34jEBAKG35y5AwKG3+CdCgKG3/TyAgKG39jXCQKG3/jiBAKG38zHAwKG39C8CgKG36SRAQKG34j2CQKG35wrAobf4I8PAobftNcKAobfmIwBAobfuO8NAobfjMQEAobfkLkDAobf5J0KAobfyPICAobf3NcJAobf/OIEAobfwMcDAobf1LwKAobfuJEBAobfjPYJAobfkCsCht/kjw8Cht+I1woCht+cjAECht+87w0Cht+AxAQCht+UuQMCht/4nQoCht/M8gICht/Q1wkCxO3crwoCht/UyQ0Cht/A7AoCht/8lwMCht/ouggCht+EXQKG37CACQKG36yrBgKG35j8AwKG37SnCAKG35TEBAKG34DvDQKG37ySCgKG36i1AwKG38TZCwKG3/B8Aobf0MkNAobfzOwKAobf+JcDAobflLoIAobfgF0Cht+8gAkCht+oqwYCht+E/AMCht+wpwgCht+QxAQCht+M7w0Cht+4kgoCht/UtgMCht/A2QsCht/8fAKG39zJDQKG38jsCgKG3+SXAwKG35C6CAKG34xdAobfuIAJAobf1KQGAobfgPwDAobfvKcIAobfnMQEAobfiO8NAobfpJIKAobf0LYDAobfzNkLAobf+HwCht/YyQ0Cht/07AoCht/glwMCht+cuggCht+IXQKG36SACQKG39CkBgKG34z8AwKG37inCAKG35jEBAKG37TvDQKG36CSCgKG39y2AwKG38jZCwKG3+R8AobfxMkNAobf8OwKAobf7JcDAobfmLoIAobftF0Cht+ggAkCht/cpAYCht+I/AMCht+kpwgCht+ExAQCht+w7w0Cht+skgoCht/YtgMCht/02QsCht/gfAKG38DJDQKG3/zsCgKG3+iXAwKG34S6CAKG37BdAobfrIAJAobf2KQGAobftPwDAobfoKcIAobfgMQEAobfvO8NAobfqJIKAobfxLYDAobf8NkLAobf7HwCl/uaVQKQ+85WApD7ylYCkPv+VgKQ+/pWApD7mlUCkPuWVQKAlJy7DALl4+bIBwLs/ODrAgKDgsLyBAL8rtigCwLOraazCAL/spulBgL64r3HAgKbvcvhBH6TLP2ZaDUrixvu2fWa5d4zHp+K" />
+			<!--------------------------------------->
+			<table border="0" cellSpacing="0" cellPadding="0" width="100%">
+				<tr>
+					<td class="toolbar" height="5"><!--버튼 시작 -->
+						<table border="0" cellSpacing="5" cellPadding="0">
+							<tr>
+								<td><FONT face="굴림"><input type="image" name="ibtnLecTable" id="ibtnLecTable" id="ibtnLecTable" onmouseover="this.src='/ITISWebCommon/images/buttonOutput/address수강_희망과목_리스트over.png'" onmouseout="this.src='/ITISWebCommon/images/buttonOutput/address수강_희망과목_리스트.png'" onmousedown="this.src='/ITISWebCommon/images/buttonOutput/address수강_희망과목_리스트click.png'" onmouseup="this.src='/ITISWebCommon/images/buttonOutput/address수강_희망과목_리스트.png'" src="/ITISWebCommon/images/buttonOutput/address%ec%88%98%ea%b0%95_%ed%9d%ac%eb%a7%9d%ea%b3%bc%eb%aa%a9_%eb%a6%ac%ec%8a%a4%ed%8a%b8.png" alt="수강 희망과목 리스트" onclick="openPop1();return false;" language="javascript" border="0" style="display:none;cursor:default;" /><input type="image" name="ibtnPrint" id="ibtnPrint" id="ibtnPrint" onmouseover="this.src='/ITISWebCommon/images/buttonOutput/print인쇄over.png'" onmouseout="this.src='/ITISWebCommon/images/buttonOutput/print인쇄.png'" onmousedown="this.src='/ITISWebCommon/images/buttonOutput/print인쇄click.png'" onmouseup="this.src='/ITISWebCommon/images/buttonOutput/print인쇄.png'" src="/ITISWebCommon/images/buttonOutput/print%ec%9d%b8%ec%87%84.png" alt="인쇄" border="0" style="display:none;cursor:default;" />
+                                <a id="ibtnReSave" href="javascript:__doPostBack('ibtnReSave','')"></a>
+                                    </FONT></td>
+								<td></td>
+								<!--<td><A href="javascript:;"><IMG height="21" src="/ITISWebCommon/images/button/bt_print.gif" width="50" border="0"></A></td>--></tr>
+						</table>
+						<!-- 버튼 끝 --></td>
+				</tr>
+				<tr>
+					<div>
+						<!-- 본문 시작 --></div>
+				</tr>
+			</table>
+			<table class="search-area" border="0" cellSpacing="0" cellPadding="0" width="100%">
+				<tr>
+					<td>
+						<table class="search-box" border="0" cellSpacing="0" cellPadding="4" width="100%">
+							<tr>
+								<td>
+									<table border="0" cellSpacing="0" cellPadding="0">
+										<tbody>
+											<tr>
+												<td class="search-option" noWrap><IMG src="/ITISWebCommon/images/cir_search.gif"><span id="lblMajor">학부(과)/전공</span></td>
+												<td><select name="ddlDept" id="ddlDept">
+	<option value="0194002">기계공학과 / 기계공학</option>
+	<option value="0198005">항공우주공학과 / 항공우주공학</option>
+	<option value="0220021">화학공학과 / 화학공학</option>
+	<option value="0223022">고분자공학과 / 고분자공학</option>
+	<option value="0234032">지리정보공학과 / 지리정보공학</option>
+	<option value="0225028">환경공학과 / 환경공학</option>
+	<option value="0233156">건축공학과 / 건축공학</option>
+	<option value="0930430">에너지자원공학과 / 에너지자원공학</option>
+	<option value="1013446">조선해양공학과 / 조선해양공학</option>
+	<option value="1014514">산업경영공학과 / 산업경영공학</option>
+	<option value="1015304">생명공학과 / 생명공학</option>
+	<option value="1016386">신소재공학과 / 신소재공학</option>
+	<option value="1017516">사회인프라공학과 / 사회인프라공학</option>
+	<option value="1018305">건축학과 / 건축학</option>
+	<option value="1019517">융합기술경영학부 / 융합기술경영학</option>
+	<option value="1035515">유기응용재료공학과 / 유기응용재료공학</option>
+	<option selected="selected" value="1020405">컴퓨터정보공학과 / 컴퓨터정보공학</option>
+	<option value="1021283">정보통신공학과 / 정보통신공학</option>
+	<option value="1061015">전자공학과 / 전자공학</option>
+	<option value="1062014">전기공학과 / 전기공학</option>
+	<option value="1067522">IT공대 / IT공대</option>
+	<option value="0847409">기초의과학부 / 기초의과학</option>
+	<option value="1022306">생명과학과 / 생명과학</option>
+	<option value="1023307">해양과학과 / 해양과학</option>
+	<option value="1063157">수학과 / 수학</option>
+	<option value="1064040">통계학과 / 통계학</option>
+	<option value="1065039">물리학과 / 물리학</option>
+	<option value="1066041">화학과 / 화학</option>
+	<option value="0260047">경제학과 / 경제학</option>
+	<option value="1024268">국제통상학과 / 국제통상학</option>
+	<option value="0333045">경영학과 / 경영학</option>
+	<option value="0934339">아태물류학부 / 물류학</option>
+	<option value="1025431">글로벌금융학과 / 글로벌금융학</option>
+	<option value="0267059">국어교육과 / 국어교육</option>
+	<option value="0268065">영어교육과 / 영어교육</option>
+	<option value="0273057">체육교육과 / 체육교육</option>
+	<option value="0749160">수학교육과 / 수학교육</option>
+	<option value="0275054">사회교육과 / 사회교육</option>
+	<option value="0276055">교육학과 / 교육학</option>
+	<option value="0520050">법학부 / 법학</option>
+	<option value="0520269">법학부 / 법학부</option>
+	<option value="0520270">법학부 / 지적재산권학</option>
+	<option value="0478051">행정학과 / 행정학</option>
+	<option value="0477053">정치외교학과 / 정치외교학</option>
+	<option value="0479215">언론정보학과 / 언론정보학</option>
+	<option value="0294067">영어영문학과 / 영어영문학</option>
+	<option value="0301071">사학과 / 사학</option>
+	<option value="0302072">철학과 / 철학</option>
+	<option value="1026369">한국어문학과 / 한국어문학</option>
+	<option value="1027484">중국언어문화학과 / 중국언어문화</option>
+	<option value="1028485">일본언어문화학과 / 일본언어문화</option>
+	<option value="1029486">프랑스언어문화학과 / 프랑스언어문화</option>
+	<option value="1030371">문화콘텐츠학과 / 문화콘텐츠</option>
+	<option value="1031487">문화경영학과 / 문화경영</option>
+	<option value="0483074">식품영양학과 / 식품영양학</option>
+	<option value="1032364">소비자학과 / 소비자학</option>
+	<option value="1033518">아동학과 / 아동학</option>
+	<option value="1034288">의류디자인학과 / 의류디자인학</option>
+	<option value="0321079">간호학과 / 간호학</option>
+	<option value="0756338">예술체육학부 / 미술</option>
+	<option value="0756341">예술체육학부 / 시각정보디자인</option>
+	<option value="0756344">예술체육학부 / 예술체육학부</option>
+	<option value="0756372">예술체육학부 / 연극영화</option>
+	<option value="0756519">예술체육학부 / 스포츠과학</option>
+
+</select></td>
+												<td style="WIDTH: 62px" width="62" noWrap>&nbsp;</td>
+												<td><input type="image" name="ibtnSearch1" id="ibtnSearch1" id="ibtnSearch1" onmouseover="this.src='/ITISWebCommon/images/buttonOutput/search조회over.png'" onmouseout="this.src='/ITISWebCommon/images/buttonOutput/search조회.png'" onmousedown="this.src='/ITISWebCommon/images/buttonOutput/search조회click.png'" onmouseup="this.src='/ITISWebCommon/images/buttonOutput/search조회.png'" src="/ITISWebCommon/images/buttonOutput/search%ec%a1%b0%ed%9a%8c.png" alt="조회" border="0" style="cursor:default;" /></td>
+											</tr>
+											<tr>
+												<td style="HEIGHT: 32px" class="search-option" noWrap><IMG src="/ITISWebCommon/images/cir_search.gif"><span id="lblEtc">기타</span></td>
+												<td><select name="ddlKita" id="ddlKita">
+	<option value="4">E-Learning</option>
+	<option value="0529">가상대학(OCU)</option>
+	<option value="1">Academic English (1학년)</option>
+	<option value="2">Academic English Reading (2학년)</option>
+	<option value="3">사범대 교직과정</option>
+	<option value="0436">비사대교직/군사학</option>
+	<option value="0561">교양선택/외국인교필</option>
+	<option value="5">원어강의</option>
+	<option selected="selected" value="0807">인하공학교육혁신센터</option>
+
+</select><FONT face="굴림"></FONT></td>
+												<td style="WIDTH: 62px" width="62" noWrap>&nbsp;</td>
+												<td><input type="image" name="ibtnSearch2" id="ibtnSearch2" id="ibtnSearch2" onmouseover="this.src='/ITISWebCommon/images/buttonOutput/search조회over.png'" onmouseout="this.src='/ITISWebCommon/images/buttonOutput/search조회.png'" onmousedown="this.src='/ITISWebCommon/images/buttonOutput/search조회click.png'" onmouseup="this.src='/ITISWebCommon/images/buttonOutput/search조회.png'" src="/ITISWebCommon/images/buttonOutput/search%ec%a1%b0%ed%9a%8c.png" alt="조회" border="0" style="cursor:default;" /></td>
+											</tr>
+											<tr>
+												<td class="search-option" noWrap><IMG src="/ITISWebCommon/images/cir_search.gif"><span id="Label1">강의시간</span></td>
+												<td><select name="ddlTime1" id="ddlTime1">
+	<option selected="selected" value="선택">선택</option>
+	<option value="D1T1">월1</option>
+	<option value="D1T2">월2</option>
+	<option value="D1T3">월3</option>
+	<option value="D1T4">월4</option>
+	<option value="D1T5">월5</option>
+	<option value="D1T6">월6</option>
+	<option value="D1T7">월7</option>
+	<option value="D1T8">월8</option>
+	<option value="D1T9">월9</option>
+	<option value="D1TA">월10</option>
+	<option value="D1TB">월11</option>
+	<option value="D1TC">월12</option>
+	<option value="D1TD">월13</option>
+	<option value="D1TE">월14</option>
+	<option value="D1TF">월15</option>
+	<option value="D2T1">화1</option>
+	<option value="D2T2">화2</option>
+	<option value="D2T3">화3</option>
+	<option value="D2T4">화4</option>
+	<option value="D2T5">화5</option>
+	<option value="D2T6">화6</option>
+	<option value="D2T7">화7</option>
+	<option value="D2T8">화8</option>
+	<option value="D2T9">화9</option>
+	<option value="D2TA">화10</option>
+	<option value="D2TB">화11</option>
+	<option value="D2TC">화12</option>
+	<option value="D2TD">화13</option>
+	<option value="D2TE">화14</option>
+	<option value="D2TF">화15</option>
+	<option value="D3T1">수1</option>
+	<option value="D3T2">수2</option>
+	<option value="D3T3">수3</option>
+	<option value="D3T4">수4</option>
+	<option value="D3T5">수5</option>
+	<option value="D3T6">수6</option>
+	<option value="D3T7">수7</option>
+	<option value="D3T8">수8</option>
+	<option value="D3T9">수9</option>
+	<option value="D3TA">수10</option>
+	<option value="D3TB">수11</option>
+	<option value="D3TC">수12</option>
+	<option value="D3TD">수13</option>
+	<option value="D3TE">수14</option>
+	<option value="D3TF">수15</option>
+	<option value="D4T1">목1</option>
+	<option value="D4T2">목2</option>
+	<option value="D4T3">목3</option>
+	<option value="D4T4">목4</option>
+	<option value="D4T5">목5</option>
+	<option value="D4T6">목6</option>
+	<option value="D4T7">목7</option>
+	<option value="D4T8">목8</option>
+	<option value="D4T9">목9</option>
+	<option value="D4TA">목10</option>
+	<option value="D4TB">목11</option>
+	<option value="D4TC">목12</option>
+	<option value="D4TD">목13</option>
+	<option value="D4TE">목14</option>
+	<option value="D4TF">목15</option>
+	<option value="D5T1">금1</option>
+	<option value="D5T2">금2</option>
+	<option value="D5T3">금3</option>
+	<option value="D5T4">금4</option>
+	<option value="D5T5">금5</option>
+	<option value="D5T6">금6</option>
+	<option value="D5T7">금7</option>
+	<option value="D5T8">금8</option>
+	<option value="D5T9">금9</option>
+	<option value="D5TA">금10</option>
+	<option value="D5TB">금11</option>
+	<option value="D5TC">금12</option>
+	<option value="D5TD">금13</option>
+	<option value="D5TE">금14</option>
+	<option value="D5TF">금15</option>
+	<option value="D6T1">토1</option>
+	<option value="D6T2">토2</option>
+	<option value="D6T3">토3</option>
+	<option value="D6T4">토4</option>
+	<option value="D6T5">토5</option>
+	<option value="D6T6">토6</option>
+	<option value="D6T7">토7</option>
+	<option value="D6T8">토8</option>
+	<option value="D6T9">토9</option>
+	<option value="D6TA">토10</option>
+	<option value="D6TB">토11</option>
+	<option value="D6TC">토12</option>
+	<option value="D6TD">토13</option>
+	<option value="D6TE">토14</option>
+	<option value="D6TF">토15</option>
+
+</select><FONT face="굴림">&nbsp;
+														<select name="ddlTime2" id="ddlTime2" style="Z-INDEX: 0">
+	<option selected="selected" value="선택">선택</option>
+	<option value="D1T1">월1</option>
+	<option value="D1T2">월2</option>
+	<option value="D1T3">월3</option>
+	<option value="D1T4">월4</option>
+	<option value="D1T5">월5</option>
+	<option value="D1T6">월6</option>
+	<option value="D1T7">월7</option>
+	<option value="D1T8">월8</option>
+	<option value="D1T9">월9</option>
+	<option value="D1TA">월10</option>
+	<option value="D1TB">월11</option>
+	<option value="D1TC">월12</option>
+	<option value="D1TD">월13</option>
+	<option value="D1TE">월14</option>
+	<option value="D1TF">월15</option>
+	<option value="D2T1">화1</option>
+	<option value="D2T2">화2</option>
+	<option value="D2T3">화3</option>
+	<option value="D2T4">화4</option>
+	<option value="D2T5">화5</option>
+	<option value="D2T6">화6</option>
+	<option value="D2T7">화7</option>
+	<option value="D2T8">화8</option>
+	<option value="D2T9">화9</option>
+	<option value="D2TA">화10</option>
+	<option value="D2TB">화11</option>
+	<option value="D2TC">화12</option>
+	<option value="D2TD">화13</option>
+	<option value="D2TE">화14</option>
+	<option value="D2TF">화15</option>
+	<option value="D3T1">수1</option>
+	<option value="D3T2">수2</option>
+	<option value="D3T3">수3</option>
+	<option value="D3T4">수4</option>
+	<option value="D3T5">수5</option>
+	<option value="D3T6">수6</option>
+	<option value="D3T7">수7</option>
+	<option value="D3T8">수8</option>
+	<option value="D3T9">수9</option>
+	<option value="D3TA">수10</option>
+	<option value="D3TB">수11</option>
+	<option value="D3TC">수12</option>
+	<option value="D3TD">수13</option>
+	<option value="D3TE">수14</option>
+	<option value="D3TF">수15</option>
+	<option value="D4T1">목1</option>
+	<option value="D4T2">목2</option>
+	<option value="D4T3">목3</option>
+	<option value="D4T4">목4</option>
+	<option value="D4T5">목5</option>
+	<option value="D4T6">목6</option>
+	<option value="D4T7">목7</option>
+	<option value="D4T8">목8</option>
+	<option value="D4T9">목9</option>
+	<option value="D4TA">목10</option>
+	<option value="D4TB">목11</option>
+	<option value="D4TC">목12</option>
+	<option value="D4TD">목13</option>
+	<option value="D4TE">목14</option>
+	<option value="D4TF">목15</option>
+	<option value="D5T1">금1</option>
+	<option value="D5T2">금2</option>
+	<option value="D5T3">금3</option>
+	<option value="D5T4">금4</option>
+	<option value="D5T5">금5</option>
+	<option value="D5T6">금6</option>
+	<option value="D5T7">금7</option>
+	<option value="D5T8">금8</option>
+	<option value="D5T9">금9</option>
+	<option value="D5TA">금10</option>
+	<option value="D5TB">금11</option>
+	<option value="D5TC">금12</option>
+	<option value="D5TD">금13</option>
+	<option value="D5TE">금14</option>
+	<option value="D5TF">금15</option>
+	<option value="D6T1">토1</option>
+	<option value="D6T2">토2</option>
+	<option value="D6T3">토3</option>
+	<option value="D6T4">토4</option>
+	<option value="D6T5">토5</option>
+	<option value="D6T6">토6</option>
+	<option value="D6T7">토7</option>
+	<option value="D6T8">토8</option>
+	<option value="D6T9">토9</option>
+	<option value="D6TA">토10</option>
+	<option value="D6TB">토11</option>
+	<option value="D6TC">토12</option>
+	<option value="D6TD">토13</option>
+	<option value="D6TE">토14</option>
+	<option value="D6TF">토15</option>
+
+</select></FONT><FONT face="굴림">&nbsp;
+														<select name="ddlTime3" id="ddlTime3" style="Z-INDEX: 0">
+	<option selected="selected" value="선택">선택</option>
+	<option value="D1T1">월1</option>
+	<option value="D1T2">월2</option>
+	<option value="D1T3">월3</option>
+	<option value="D1T4">월4</option>
+	<option value="D1T5">월5</option>
+	<option value="D1T6">월6</option>
+	<option value="D1T7">월7</option>
+	<option value="D1T8">월8</option>
+	<option value="D1T9">월9</option>
+	<option value="D1TA">월10</option>
+	<option value="D1TB">월11</option>
+	<option value="D1TC">월12</option>
+	<option value="D1TD">월13</option>
+	<option value="D1TE">월14</option>
+	<option value="D1TF">월15</option>
+	<option value="D2T1">화1</option>
+	<option value="D2T2">화2</option>
+	<option value="D2T3">화3</option>
+	<option value="D2T4">화4</option>
+	<option value="D2T5">화5</option>
+	<option value="D2T6">화6</option>
+	<option value="D2T7">화7</option>
+	<option value="D2T8">화8</option>
+	<option value="D2T9">화9</option>
+	<option value="D2TA">화10</option>
+	<option value="D2TB">화11</option>
+	<option value="D2TC">화12</option>
+	<option value="D2TD">화13</option>
+	<option value="D2TE">화14</option>
+	<option value="D2TF">화15</option>
+	<option value="D3T1">수1</option>
+	<option value="D3T2">수2</option>
+	<option value="D3T3">수3</option>
+	<option value="D3T4">수4</option>
+	<option value="D3T5">수5</option>
+	<option value="D3T6">수6</option>
+	<option value="D3T7">수7</option>
+	<option value="D3T8">수8</option>
+	<option value="D3T9">수9</option>
+	<option value="D3TA">수10</option>
+	<option value="D3TB">수11</option>
+	<option value="D3TC">수12</option>
+	<option value="D3TD">수13</option>
+	<option value="D3TE">수14</option>
+	<option value="D3TF">수15</option>
+	<option value="D4T1">목1</option>
+	<option value="D4T2">목2</option>
+	<option value="D4T3">목3</option>
+	<option value="D4T4">목4</option>
+	<option value="D4T5">목5</option>
+	<option value="D4T6">목6</option>
+	<option value="D4T7">목7</option>
+	<option value="D4T8">목8</option>
+	<option value="D4T9">목9</option>
+	<option value="D4TA">목10</option>
+	<option value="D4TB">목11</option>
+	<option value="D4TC">목12</option>
+	<option value="D4TD">목13</option>
+	<option value="D4TE">목14</option>
+	<option value="D4TF">목15</option>
+	<option value="D5T1">금1</option>
+	<option value="D5T2">금2</option>
+	<option value="D5T3">금3</option>
+	<option value="D5T4">금4</option>
+	<option value="D5T5">금5</option>
+	<option value="D5T6">금6</option>
+	<option value="D5T7">금7</option>
+	<option value="D5T8">금8</option>
+	<option value="D5T9">금9</option>
+	<option value="D5TA">금10</option>
+	<option value="D5TB">금11</option>
+	<option value="D5TC">금12</option>
+	<option value="D5TD">금13</option>
+	<option value="D5TE">금14</option>
+	<option value="D5TF">금15</option>
+	<option value="D6T1">토1</option>
+	<option value="D6T2">토2</option>
+	<option value="D6T3">토3</option>
+	<option value="D6T4">토4</option>
+	<option value="D6T5">토5</option>
+	<option value="D6T6">토6</option>
+	<option value="D6T7">토7</option>
+	<option value="D6T8">토8</option>
+	<option value="D6T9">토9</option>
+	<option value="D6TA">토10</option>
+	<option value="D6TB">토11</option>
+	<option value="D6TC">토12</option>
+	<option value="D6TD">토13</option>
+	<option value="D6TE">토14</option>
+	<option value="D6TF">토15</option>
+
+</select><span id="Label2" class="comment" style="Z-INDEX: 0">* 최소 2시간 이상 선택</span>&nbsp;
+														<span id="rdoKwamokGubun" style="display:inline-block;Z-INDEX: 0"><input id="rdoKwamokGubun_0" type="radio" name="rdoKwamokGubun" value="99" checked="checked" /><label for="rdoKwamokGubun_0">전체</label><input id="rdoKwamokGubun_1" type="radio" name="rdoKwamokGubun" value="06" /><label for="rdoKwamokGubun_1">전선</label><input id="rdoKwamokGubun_2" type="radio" name="rdoKwamokGubun" value="05" /><label for="rdoKwamokGubun_2">전필</label><input id="rdoKwamokGubun_3" type="radio" name="rdoKwamokGubun" value="02" /><label for="rdoKwamokGubun_3">교선</label><input id="rdoKwamokGubun_4" type="radio" name="rdoKwamokGubun" value="01" /><label for="rdoKwamokGubun_4">교필</label><input id="rdoKwamokGubun_5" type="radio" name="rdoKwamokGubun" value="09" /><label for="rdoKwamokGubun_5">일선</label><input id="rdoKwamokGubun_6" type="radio" name="rdoKwamokGubun" value="08" /><label for="rdoKwamokGubun_6">교직</label></span></FONT></td>
+								</td>
+								<td style="WIDTH: 62px" width="62" noWrap>&nbsp;</td>
+								<td><input type="image" name="ibtnSearch3" id="ibtnSearch3" id="ibtnSearch3" onmouseover="this.src='/ITISWebCommon/images/buttonOutput/search조회over.png'" onmouseout="this.src='/ITISWebCommon/images/buttonOutput/search조회.png'" onmousedown="this.src='/ITISWebCommon/images/buttonOutput/search조회click.png'" onmouseup="this.src='/ITISWebCommon/images/buttonOutput/search조회.png'" src="/ITISWebCommon/images/buttonOutput/search%ec%a1%b0%ed%9a%8c.png" alt="조회" border="0" style="cursor:default;" /></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+			</td></tr></tbody></table>
+			<table class="space" border="0" cellSpacing="0" cellPadding="0" align="center">
+				<tr>
+					<td></td>
+				</tr>
+			</table>
+			<table class="xg-list" border="0" cellSpacing="1" cellPadding="0">
+				<tr>
+					<td class="f-subject"><span id="lblYearTerm">2014 학년도 1학기</span><span id="lblTitle">인하공학교육혁신센터 강의시간표 및 강의계획서</span></td>
+				</tr>
+			</table>
+			<!-- 레이어 : 시작 -->
+			<table border="0" cellSpacing="0" cellPadding="0" width="100%">
+				<tr>
+					<td height="500" valign="top">
+						<div class="abs-layer"><table cellspacing="0" cellpadding="4" rules="all" bordercolor="#DEDFDE" border="1" id="dgList" bgcolor="White" width="100%">
+	<tr align="center" bgcolor="#F4F7FC">
+		<td width="80"><font color="#254A69" size="2"><b>학수번호</b></font></td><td width="30"><font color="#254A69" size="2"><b>분반그룹</b></font></td><td width="150"><font color="#254A69" size="2"><b>과목명</b></font></td><td width="40"><font color="#254A69" size="2"><b>학년</b></font></td><td width="30"><font color="#254A69" size="2"><b>학점</b></font></td><td width="60"><font color="#254A69" size="2"><b>과목구분</b></font></td><td width="100"><font color="#254A69" size="2"><b>시간 및 강의실</b></font></td><td width="70"><font color="#254A69" size="2"><b>담당교수</b></font></td><td width="60"><font color="#254A69" size="2"><b>평가방식</b></font></td><td width="100"><font color="#254A69" size="2"><b>비고</b></font></td>
+	</tr><tr>
+		<td width="80"><font color="#254A69" size="2">ACE1001-001</font></td><td width="30"><font color="#254A69" size="2">&nbsp;</font></td><td width="150"><font color="#254A69" size="2">창의적 사고</font></td><td width="40"><font color="#254A69" size="2">전체</font></td><td align="center" width="30"><font color="#254A69" size="2">3.0</font></td><td align="center" width="60"><font color="#254A69" size="2">교양필수</font></td><td align="center" width="100"><font color="#254A69" size="2">금1,2,3(5동115)</font></td><td align="center" width="70"><font color="#254A69" size="2">이영태</font></td><td align="center" width="60"><font color="#254A69" size="2">상대평가</font></td><td align="center" width="100"><font color="#254A69" size="2">&nbsp;</font></td>
+	</tr><tr>
+		<td width="80"><font color="#254A69" size="2">ACE1001-002</font></td><td width="30"><font color="#254A69" size="2">&nbsp;</font></td><td width="150"><font color="#254A69" size="2">창의적 사고</font></td><td width="40"><font color="#254A69" size="2">전체</font></td><td align="center" width="30"><font color="#254A69" size="2">3.0</font></td><td align="center" width="60"><font color="#254A69" size="2">교양필수</font></td><td align="center" width="100"><font color="#254A69" size="2">화7,목8,9(5동113)</font></td><td align="center" width="70"><font color="#254A69" size="2">진성희</font></td><td align="center" width="60"><font color="#254A69" size="2">상대평가</font></td><td align="center" width="100"><font color="#254A69" size="2">&nbsp;</font></td>
+	</tr><tr>
+		<td width="80"><font color="#254A69" size="2">ACE1001-003</font></td><td width="30"><font color="#254A69" size="2">&nbsp;</font></td><td width="150"><font color="#254A69" size="2">창의적 사고</font></td><td width="40"><font color="#254A69" size="2">전체</font></td><td align="center" width="30"><font color="#254A69" size="2">3.0</font></td><td align="center" width="60"><font color="#254A69" size="2">교양필수</font></td><td align="center" width="100"><font color="#254A69" size="2">화8,9,목7(5동113)</font></td><td align="center" width="70"><font color="#254A69" size="2">진성희</font></td><td align="center" width="60"><font color="#254A69" size="2">상대평가</font></td><td align="center" width="100"><font color="#254A69" size="2">&nbsp;</font></td>
+	</tr><tr>
+		<td width="80"><font color="#254A69" size="2">ACE1001-004</font></td><td width="30"><font color="#254A69" size="2">&nbsp;</font></td><td width="150"><font color="#254A69" size="2">창의적 사고</font></td><td width="40"><font color="#254A69" size="2">전체</font></td><td align="center" width="30"><font color="#254A69" size="2">3.0</font></td><td align="center" width="60"><font color="#254A69" size="2">교양필수</font></td><td align="center" width="100"><font color="#254A69" size="2">금7,8,9(5동113)</font></td><td align="center" width="70"><font color="#254A69" size="2">유미나</font></td><td align="center" width="60"><font color="#254A69" size="2">상대평가</font></td><td align="center" width="100"><font color="#254A69" size="2">&nbsp;</font></td>
+	</tr><tr>
+		<td width="80"><font color="#254A69" size="2">ACE1002-001</font></td><td width="30"><font color="#254A69" size="2">&nbsp;</font></td><td width="150"><font color="#254A69" size="2">과학기술과 지식재산</font></td><td width="40"><font color="#254A69" size="2">전체</font></td><td align="center" width="30"><font color="#254A69" size="2">3.0</font></td><td align="center" width="60"><font color="#254A69" size="2">교양필수</font></td><td align="center" width="100"><font color="#254A69" size="2">월4,5,6(5동113)</font></td><td align="center" width="70"><font color="#254A69" size="2">최규승</font></td><td align="center" width="60"><font color="#254A69" size="2">상대평가</font></td><td align="center" width="100"><font color="#254A69" size="2">&nbsp;</font></td>
+	</tr><tr>
+		<td width="80"><font color="#254A69" size="2">ACE1002-002</font></td><td width="30"><font color="#254A69" size="2">&nbsp;</font></td><td width="150"><font color="#254A69" size="2">과학기술과 지식재산</font></td><td width="40"><font color="#254A69" size="2">전체</font></td><td align="center" width="30"><font color="#254A69" size="2">3.0</font></td><td align="center" width="60"><font color="#254A69" size="2">교양필수</font></td><td align="center" width="100"><font color="#254A69" size="2">화1,2,목3(5동113)</font></td><td align="center" width="70"><font color="#254A69" size="2">&nbsp;</font></td><td align="center" width="60"><font color="#254A69" size="2">상대평가</font></td><td align="center" width="100"><font color="#254A69" size="2">&nbsp;</font></td>
+	</tr><tr>
+		<td width="80"><font color="#254A69" size="2">ACE1002-003</font></td><td width="30"><font color="#254A69" size="2">&nbsp;</font></td><td width="150"><font color="#254A69" size="2">과학기술과 지식재산</font></td><td width="40"><font color="#254A69" size="2">전체</font></td><td align="center" width="30"><font color="#254A69" size="2">3.0</font></td><td align="center" width="60"><font color="#254A69" size="2">교양필수</font></td><td align="center" width="100"><font color="#254A69" size="2">화7,목8,9(5동115)</font></td><td align="center" width="70"><font color="#254A69" size="2">&nbsp;</font></td><td align="center" width="60"><font color="#254A69" size="2">상대평가</font></td><td align="center" width="100"><font color="#254A69" size="2">&nbsp;</font></td>
+	</tr><tr>
+		<td width="80"><font color="#254A69" size="2">ACE1002-004</font></td><td width="30"><font color="#254A69" size="2">&nbsp;</font></td><td width="150"><font color="#254A69" size="2">과학기술과 지식재산</font></td><td width="40"><font color="#254A69" size="2">전체</font></td><td align="center" width="30"><font color="#254A69" size="2">3.0</font></td><td align="center" width="60"><font color="#254A69" size="2">교양필수</font></td><td align="center" width="100"><font color="#254A69" size="2">수1,2,3(5동113)</font></td><td align="center" width="70"><font color="#254A69" size="2">박찬정</font></td><td align="center" width="60"><font color="#254A69" size="2">상대평가</font></td><td align="center" width="100"><font color="#254A69" size="2">&nbsp;</font></td>
+	</tr><tr>
+		<td width="80"><font color="#254A69" size="2">ACE1002-005</font></td><td width="30"><font color="#254A69" size="2">&nbsp;</font></td><td width="150"><font color="#254A69" size="2">과학기술과 지식재산</font></td><td width="40"><font color="#254A69" size="2">전체</font></td><td align="center" width="30"><font color="#254A69" size="2">3.0</font></td><td align="center" width="60"><font color="#254A69" size="2">교양필수</font></td><td align="center" width="100"><font color="#254A69" size="2">수7,8,9(5동113)</font></td><td align="center" width="70"><font color="#254A69" size="2">박찬정</font></td><td align="center" width="60"><font color="#254A69" size="2">상대평가</font></td><td align="center" width="100"><font color="#254A69" size="2">&nbsp;</font></td>
+	</tr><tr>
+		<td width="80"><font color="#254A69" size="2">ACE1002-006</font></td><td width="30"><font color="#254A69" size="2">&nbsp;</font></td><td width="150"><font color="#254A69" size="2">과학기술과 지식재산</font></td><td width="40"><font color="#254A69" size="2">전체</font></td><td align="center" width="30"><font color="#254A69" size="2">3.0</font></td><td align="center" width="60"><font color="#254A69" size="2">교양필수</font></td><td align="center" width="100"><font color="#254A69" size="2">금1,2,3(5동113)</font></td><td align="center" width="70"><font color="#254A69" size="2">김보정</font></td><td align="center" width="60"><font color="#254A69" size="2">상대평가</font></td><td align="center" width="100"><font color="#254A69" size="2">&nbsp;</font></td>
+	</tr><tr>
+		<td width="80"><font color="#254A69" size="2">ACE1002-007</font></td><td width="30"><font color="#254A69" size="2">&nbsp;</font></td><td width="150"><font color="#254A69" size="2">과학기술과 지식재산</font></td><td width="40"><font color="#254A69" size="2">전체</font></td><td align="center" width="30"><font color="#254A69" size="2">3.0</font></td><td align="center" width="60"><font color="#254A69" size="2">교양필수</font></td><td align="center" width="100"><font color="#254A69" size="2">금5,6,7(5동202)</font></td><td align="center" width="70"><font color="#254A69" size="2">김보정</font></td><td align="center" width="60"><font color="#254A69" size="2">상대평가</font></td><td align="center" width="100"><font color="#254A69" size="2">&nbsp;</font></td>
+	</tr><tr>
+		<td width="80"><font color="#254A69" size="2">ACE1003-001</font></td><td width="30"><font color="#254A69" size="2">&nbsp;</font></td><td width="150"><font color="#254A69" size="2">테크노 경영</font></td><td width="40"><font color="#254A69" size="2">전체</font></td><td align="center" width="30"><font color="#254A69" size="2">3.0</font></td><td align="center" width="60"><font color="#254A69" size="2">교양필수</font></td><td align="center" width="100"><font color="#254A69" size="2">수9,10,11(5서263)</font></td><td align="center" width="70"><font color="#254A69" size="2">우성권</font></td><td align="center" width="60"><font color="#254A69" size="2">상대평가</font></td><td align="center" width="100"><font color="#254A69" size="2">&nbsp;</font></td>
+	</tr><tr>
+		<td width="80"><font color="#254A69" size="2"><a href='#', onClick="javascript:return OpenPrintABEEK('http://abeek.inha.ac.kr/ReportCurrinfo.aspx?yearterm=20141&haksu_no=ACE1003&bunban=002'); "><font color='blue'>ACE1003-002</font></a></font></td><td width="30"><font color="#254A69" size="2">&nbsp;</font></td><td width="150"><font color="#254A69" size="2">테크노 경영</font></td><td width="40"><font color="#254A69" size="2">전체</font></td><td align="center" width="30"><font color="#254A69" size="2">3.0</font></td><td align="center" width="60"><font color="#254A69" size="2">교양필수</font></td><td align="center" width="100"><font color="#254A69" size="2">수9,10,11(5서261)</font></td><td align="center" width="70"><font color="#254A69" size="2">이희남</font></td><td align="center" width="60"><font color="#254A69" size="2">상대평가</font></td><td align="center" width="100"><font color="#254A69" size="2">&nbsp;</font></td>
+	</tr><tr>
+		<td width="80"><font color="#254A69" size="2"><a href='#', onClick="javascript:return OpenPrintABEEK('http://abeek.inha.ac.kr/ReportCurrinfo.aspx?yearterm=20141&haksu_no=ACE1003&bunban=003'); "><font color='blue'>ACE1003-003</font></a></font></td><td width="30"><font color="#254A69" size="2">&nbsp;</font></td><td width="150"><font color="#254A69" size="2">테크노 경영</font></td><td width="40"><font color="#254A69" size="2">전체</font></td><td align="center" width="30"><font color="#254A69" size="2">3.0</font></td><td align="center" width="60"><font color="#254A69" size="2">교양필수</font></td><td align="center" width="100"><font color="#254A69" size="2">목1,2,3(9-512)</font></td><td align="center" width="70"><font color="#254A69" size="2">이창호</font></td><td align="center" width="60"><font color="#254A69" size="2">상대평가</font></td><td align="center" width="100"><font color="#254A69" size="2">&nbsp;</font></td>
+	</tr><tr>
+		<td width="80"><font color="#254A69" size="2">ACE1003-004</font></td><td width="30"><font color="#254A69" size="2">&nbsp;</font></td><td width="150"><font color="#254A69" size="2">테크노 경영</font></td><td width="40"><font color="#254A69" size="2">전체</font></td><td align="center" width="30"><font color="#254A69" size="2">3.0</font></td><td align="center" width="60"><font color="#254A69" size="2">교양필수</font></td><td align="center" width="100"><font color="#254A69" size="2">목1,2,3(9-514)</font></td><td align="center" width="70"><font color="#254A69" size="2">신도형</font></td><td align="center" width="60"><font color="#254A69" size="2">상대평가</font></td><td align="center" width="100"><font color="#254A69" size="2">&nbsp;</font></td>
+	</tr><tr>
+		<td width="80"><font color="#254A69" size="2"><a href='#', onClick="javascript:return OpenPrintABEEK('http://abeek.inha.ac.kr/ReportCurrinfo.aspx?yearterm=20141&haksu_no=ACE9501&bunban=001'); "><font color='blue'>ACE9501-001</font></a></font></td><td width="30"><font color="#254A69" size="2">&nbsp;</font></td><td width="150"><font color="#254A69" size="2">다학년 연구프로젝트 1</font></td><td width="40"><font color="#254A69" size="2">전체</font></td><td align="center" width="30"><font color="#254A69" size="2">1.0</font></td><td align="center" width="60"><font color="#254A69" size="2">전공선택</font></td><td align="center" width="100"><font color="#254A69" size="2">월10</font></td><td align="center" width="70"><font color="#254A69" size="2">김학일</font></td><td align="center" width="60"><font color="#254A69" size="2">상대평가</font></td><td align="center" width="100"><font color="#254A69" size="2">&nbsp;</font></td>
+	</tr><tr>
+		<td width="80"><font color="#254A69" size="2"><a href='#', onClick="javascript:return OpenPrintABEEK('http://abeek.inha.ac.kr/ReportCurrinfo.aspx?yearterm=20141&haksu_no=ACE9501&bunban=002'); "><font color='blue'>ACE9501-002</font></a></font></td><td width="30"><font color="#254A69" size="2">&nbsp;</font></td><td width="150"><font color="#254A69" size="2">다학년 연구프로젝트 1</font></td><td width="40"><font color="#254A69" size="2">전체</font></td><td align="center" width="30"><font color="#254A69" size="2">1.0</font></td><td align="center" width="60"><font color="#254A69" size="2">전공선택</font></td><td align="center" width="100"><font color="#254A69" size="2">월10(2북364)</font></td><td align="center" width="70"><font color="#254A69" size="2">김주형</font></td><td align="center" width="60"><font color="#254A69" size="2">상대평가</font></td><td align="center" width="100"><font color="#254A69" size="2">&nbsp;</font></td>
+	</tr><tr>
+		<td width="80"><font color="#254A69" size="2"><a href='#', onClick="javascript:return OpenPrintABEEK('http://abeek.inha.ac.kr/ReportCurrinfo.aspx?yearterm=20141&haksu_no=ACE9501&bunban=003'); "><font color='blue'>ACE9501-003</font></a></font></td><td width="30"><font color="#254A69" size="2">&nbsp;</font></td><td width="150"><font color="#254A69" size="2">다학년 연구프로젝트 1</font></td><td width="40"><font color="#254A69" size="2">전체</font></td><td align="center" width="30"><font color="#254A69" size="2">1.0</font></td><td align="center" width="60"><font color="#254A69" size="2">전공선택</font></td><td align="center" width="100"><font color="#254A69" size="2">월10(4-320)</font></td><td align="center" width="70"><font color="#254A69" size="2">김태정</font></td><td align="center" width="60"><font color="#254A69" size="2">상대평가</font></td><td align="center" width="100"><font color="#254A69" size="2">&nbsp;</font></td>
+	</tr><tr>
+		<td width="80"><font color="#254A69" size="2"><a href='#', onClick="javascript:return OpenPrintABEEK('http://abeek.inha.ac.kr/ReportCurrinfo.aspx?yearterm=20141&haksu_no=ACE4001&bunban=001'); "><font color='blue'>ACE4001-001</font></a></font></td><td width="30"><font color="#254A69" size="2">&nbsp;</font></td><td width="150"><font color="#254A69" size="2">공학과 윤리</font></td><td width="40"><font color="#254A69" size="2">4</font></td><td align="center" width="30"><font color="#254A69" size="2">2.0</font></td><td align="center" width="60"><font color="#254A69" size="2">교양필수</font></td><td align="center" width="100"><font color="#254A69" size="2">금1,2(9-602)</font></td><td align="center" width="70"><font color="#254A69" size="2">이양수</font></td><td align="center" width="60"><font color="#254A69" size="2">상대평가</font></td><td align="center" width="100"><font color="#254A69" size="2">&nbsp;</font></td>
+	</tr><tr>
+		<td width="80"><font color="#254A69" size="2"><a href='#', onClick="javascript:return OpenPrintABEEK('http://abeek.inha.ac.kr/ReportCurrinfo.aspx?yearterm=20141&haksu_no=ACE4001&bunban=002'); "><font color='blue'>ACE4001-002</font></a></font></td><td width="30"><font color="#254A69" size="2">&nbsp;</font></td><td width="150"><font color="#254A69" size="2">공학과 윤리</font></td><td width="40"><font color="#254A69" size="2">4</font></td><td align="center" width="30"><font color="#254A69" size="2">2.0</font></td><td align="center" width="60"><font color="#254A69" size="2">교양필수</font></td><td align="center" width="100"><font color="#254A69" size="2">금3,4(9-602)</font></td><td align="center" width="70"><font color="#254A69" size="2">이양수</font></td><td align="center" width="60"><font color="#254A69" size="2">상대평가</font></td><td align="center" width="100"><font color="#254A69" size="2">&nbsp;</font></td>
+	</tr><tr>
+		<td width="80"><font color="#254A69" size="2"><a href='#', onClick="javascript:return OpenPrintABEEK('http://abeek.inha.ac.kr/ReportCurrinfo.aspx?yearterm=20141&haksu_no=ACE4001&bunban=003'); "><font color='blue'>ACE4001-003</font></a></font></td><td width="30"><font color="#254A69" size="2">&nbsp;</font></td><td width="150"><font color="#254A69" size="2">공학과 윤리</font></td><td width="40"><font color="#254A69" size="2">4</font></td><td align="center" width="30"><font color="#254A69" size="2">2.0</font></td><td align="center" width="60"><font color="#254A69" size="2">교양필수</font></td><td align="center" width="100"><font color="#254A69" size="2">금6,7(9-602)</font></td><td align="center" width="70"><font color="#254A69" size="2">이양수</font></td><td align="center" width="60"><font color="#254A69" size="2">상대평가</font></td><td align="center" width="100"><font color="#254A69" size="2">&nbsp;</font></td>
+	</tr><tr>
+		<td width="80"><font color="#254A69" size="2"><a href='#', onClick="javascript:return OpenPrintABEEK('http://abeek.inha.ac.kr/ReportCurrinfo.aspx?yearterm=20141&haksu_no=ACE4001&bunban=004'); "><font color='blue'>ACE4001-004</font></a></font></td><td width="30"><font color="#254A69" size="2">&nbsp;</font></td><td width="150"><font color="#254A69" size="2">공학과 윤리</font></td><td width="40"><font color="#254A69" size="2">4</font></td><td align="center" width="30"><font color="#254A69" size="2">2.0</font></td><td align="center" width="60"><font color="#254A69" size="2">교양필수</font></td><td align="center" width="100"><font color="#254A69" size="2">금8,9(9-602)</font></td><td align="center" width="70"><font color="#254A69" size="2">이양수</font></td><td align="center" width="60"><font color="#254A69" size="2">상대평가</font></td><td align="center" width="100"><font color="#254A69" size="2">&nbsp;</font></td>
+	</tr><tr>
+		<td width="80"><font color="#254A69" size="2"><a href='#', onClick="javascript:return OpenPrintABEEK('http://abeek.inha.ac.kr/ReportCurrinfo.aspx?yearterm=20141&haksu_no=ACE4001&bunban=005'); "><font color='blue'>ACE4001-005</font></a></font></td><td width="30"><font color="#254A69" size="2">&nbsp;</font></td><td width="150"><font color="#254A69" size="2">공학과 윤리</font></td><td width="40"><font color="#254A69" size="2">4</font></td><td align="center" width="30"><font color="#254A69" size="2">2.0</font></td><td align="center" width="60"><font color="#254A69" size="2">교양필수</font></td><td align="center" width="100"><font color="#254A69" size="2">금1,2(9-604)</font></td><td align="center" width="70"><font color="#254A69" size="2">정성관</font></td><td align="center" width="60"><font color="#254A69" size="2">상대평가</font></td><td align="center" width="100"><font color="#254A69" size="2">&nbsp;</font></td>
+	</tr><tr>
+		<td width="80"><font color="#254A69" size="2"><a href='#', onClick="javascript:return OpenPrintABEEK('http://abeek.inha.ac.kr/ReportCurrinfo.aspx?yearterm=20141&haksu_no=ACE4001&bunban=006'); "><font color='blue'>ACE4001-006</font></a></font></td><td width="30"><font color="#254A69" size="2">&nbsp;</font></td><td width="150"><font color="#254A69" size="2">공학과 윤리</font></td><td width="40"><font color="#254A69" size="2">4</font></td><td align="center" width="30"><font color="#254A69" size="2">2.0</font></td><td align="center" width="60"><font color="#254A69" size="2">교양필수</font></td><td align="center" width="100"><font color="#254A69" size="2">금3,4(9-604)</font></td><td align="center" width="70"><font color="#254A69" size="2">정성관</font></td><td align="center" width="60"><font color="#254A69" size="2">상대평가</font></td><td align="center" width="100"><font color="#254A69" size="2">&nbsp;</font></td>
+	</tr><tr>
+		<td width="80"><font color="#254A69" size="2"><a href='#', onClick="javascript:return OpenPrintABEEK('http://abeek.inha.ac.kr/ReportCurrinfo.aspx?yearterm=20141&haksu_no=ACE4001&bunban=007'); "><font color='blue'>ACE4001-007</font></a></font></td><td width="30"><font color="#254A69" size="2">&nbsp;</font></td><td width="150"><font color="#254A69" size="2">공학과 윤리</font></td><td width="40"><font color="#254A69" size="2">4</font></td><td align="center" width="30"><font color="#254A69" size="2">2.0</font></td><td align="center" width="60"><font color="#254A69" size="2">교양필수</font></td><td align="center" width="100"><font color="#254A69" size="2">금6,7(9-604)</font></td><td align="center" width="70"><font color="#254A69" size="2">정성관</font></td><td align="center" width="60"><font color="#254A69" size="2">상대평가</font></td><td align="center" width="100"><font color="#254A69" size="2">&nbsp;</font></td>
+	</tr><tr>
+		<td width="80"><font color="#254A69" size="2"><a href='#', onClick="javascript:return OpenPrintABEEK('http://abeek.inha.ac.kr/ReportCurrinfo.aspx?yearterm=20141&haksu_no=ACE4001&bunban=008'); "><font color='blue'>ACE4001-008</font></a></font></td><td width="30"><font color="#254A69" size="2">&nbsp;</font></td><td width="150"><font color="#254A69" size="2">공학과 윤리</font></td><td width="40"><font color="#254A69" size="2">4</font></td><td align="center" width="30"><font color="#254A69" size="2">2.0</font></td><td align="center" width="60"><font color="#254A69" size="2">교양필수</font></td><td align="center" width="100"><font color="#254A69" size="2">금8,9(9-604)</font></td><td align="center" width="70"><font color="#254A69" size="2">정성관</font></td><td align="center" width="60"><font color="#254A69" size="2">상대평가</font></td><td align="center" width="100"><font color="#254A69" size="2">&nbsp;</font></td>
+	</tr><tr>
+		<td width="80"><font color="#254A69" size="2">ACE4001-009</font></td><td width="30"><font color="#254A69" size="2">&nbsp;</font></td><td width="150"><font color="#254A69" size="2">공학과 윤리</font></td><td width="40"><font color="#254A69" size="2">4</font></td><td align="center" width="30"><font color="#254A69" size="2">2.0</font></td><td align="center" width="60"><font color="#254A69" size="2">교양필수</font></td><td align="center" width="100"><font color="#254A69" size="2">목1,2(9-604)</font></td><td align="center" width="70"><font color="#254A69" size="2">박상태</font></td><td align="center" width="60"><font color="#254A69" size="2">상대평가</font></td><td align="center" width="100"><font color="#254A69" size="2">&nbsp;</font></td>
+	</tr><tr>
+		<td width="80"><font color="#254A69" size="2">ACE4001-010</font></td><td width="30"><font color="#254A69" size="2">&nbsp;</font></td><td width="150"><font color="#254A69" size="2">공학과 윤리</font></td><td width="40"><font color="#254A69" size="2">4</font></td><td align="center" width="30"><font color="#254A69" size="2">2.0</font></td><td align="center" width="60"><font color="#254A69" size="2">교양필수</font></td><td align="center" width="100"><font color="#254A69" size="2">목3,4(9-604)</font></td><td align="center" width="70"><font color="#254A69" size="2">박상태</font></td><td align="center" width="60"><font color="#254A69" size="2">상대평가</font></td><td align="center" width="100"><font color="#254A69" size="2">&nbsp;</font></td>
+	</tr><tr>
+		<td width="80"><font color="#254A69" size="2">ACE4001-011</font></td><td width="30"><font color="#254A69" size="2">&nbsp;</font></td><td width="150"><font color="#254A69" size="2">공학과 윤리</font></td><td width="40"><font color="#254A69" size="2">4</font></td><td align="center" width="30"><font color="#254A69" size="2">2.0</font></td><td align="center" width="60"><font color="#254A69" size="2">교양필수</font></td><td align="center" width="100"><font color="#254A69" size="2">목6,7(5동202)</font></td><td align="center" width="70"><font color="#254A69" size="2">박상태</font></td><td align="center" width="60"><font color="#254A69" size="2">상대평가</font></td><td align="center" width="100"><font color="#254A69" size="2">&nbsp;</font></td>
+	</tr><tr>
+		<td width="80"><font color="#254A69" size="2"><a href='#', onClick="javascript:return OpenPrintABEEK('http://abeek.inha.ac.kr/ReportCurrinfo.aspx?yearterm=20141&haksu_no=ACE4001&bunban=012'); "><font color='blue'>ACE4001-012</font></a></font></td><td width="30"><font color="#254A69" size="2">&nbsp;</font></td><td width="150"><font color="#254A69" size="2">공학과 윤리</font></td><td width="40"><font color="#254A69" size="2">4</font></td><td align="center" width="30"><font color="#254A69" size="2">2.0</font></td><td align="center" width="60"><font color="#254A69" size="2">교양필수</font></td><td align="center" width="100"><font color="#254A69" size="2">월3,4(9-602)</font></td><td align="center" width="70"><font color="#254A69" size="2">정현철</font></td><td align="center" width="60"><font color="#254A69" size="2">상대평가</font></td><td align="center" width="100"><font color="#254A69" size="2">&nbsp;</font></td>
+	</tr>
+</table></div>
+					</td>
+				</tr>
+			</table>
+			<!-- 레이어 : 끝-->
+			<table class="space" border="0" cellSpacing="0" cellPadding="0" align="center">
+				<tr>
+					<td></td>
+				</tr>
+			</table>
+			<table class="f-table" border="0" cellSpacing="1" cellPadding="0">
+				<tr>
+					<td class="cell-title" height="24" width="128"><span id="lblBigo">비고</span></td>
+					<td class="cell-field"></td>
+				</tr>
+			</table>
+			<table class="space" border="0" cellSpacing="0" cellPadding="0" align="center">
+				<tr>
+					<td style="PADDING-BOTTOM: 5px; PADDING-TOP: 10px"><span id="lblComment" class="comment">* 강의시간표는 
+											학부(과)의 사정에 따라 변경될 수 있습니다. 변경 사항은 학부(과) 사무실로 문의바랍니다.</span></td>
+				</tr>
+				<tr>
+					<td style="PADDING-BOTTOM: 1px; PADDING-TOP: 1px"><span id="lblComment2" class="comment">* 비고란의 
+											"선수"는 선수과목이 지정된 교과목임.</span></td>
+				</tr>
+			</table>
+			<div></DIV>
+			</tr></table><input name="hhdGetval" type="hidden" id="hhdGetval" value="인하공학교육혁신센터 강의시간표 및 강의계획서|0807|000" />
+			<input name="hhdSrchGubun" type="hidden" id="hhdSrchGubun" value="search2" /> <input name="hhdPopUpState" type="hidden" id="hhdPopUpState" /><!-- 팝업정보-->
+			<input name="hhdCallPage" type="hidden" id="hhdCallPage" /> <input name="hhdCacheTime" type="hidden" id="hhdCacheTime" />
+			<input name="hidLang" type="hidden" id="hidLang" value="KOR" />
+           	<input name="hhdhaksubunban" type="hidden" id="hhdhaksubunban" /> 
+
+		
+<script language='javascript'>window.onload = fn_WindowOnLoad;</script></form>
+	</body>
+</html>
