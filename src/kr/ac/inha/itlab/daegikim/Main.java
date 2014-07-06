@@ -5,9 +5,9 @@ import kr.ac.inha.itlab.daegikim.services.*;
 import java.io.IOException;
 
 public class Main {
-    private static final String YEAR = "2013";
-    private static final String SEMESTER = "fall";
-    private static final String LOCATION = "backup/2013-fall";
+    private static final String YEAR = "2014";
+    private static final String SEMESTER = "summer";
+    private static final String LOCATION = "backup/2014-summer";
 
     public static void main(String[] args) throws IOException {
 /*
